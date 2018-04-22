@@ -6,30 +6,47 @@ const publidDir = path.resolve(__dirname, 'public');
 module.exports = [
   {
     mode: 'development',
-    entry: './src/index.js',
+    devtool: 'cheap-module-source-map',
+    entry: './src/index.tsx',
     output: {
       path: publidDir,
       publicPath: '/',
       filename: 'bundle.js',
     },
+    // module: {
+    //   rules: [
+    //     {
+    //       test: /\.(js|jsx)$/,
+    //       exclude: /node_modules/,
+    //       use: [
+    //         {
+    //           loader: 'babel-loader',
+    //           options: {
+    //             presets: ['react', 'es2015'],
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
+          test: /\.tsx?$/,
           use: [
+            { loader: 'ts-loader' },
             {
-              loader: 'babel-loader',
+              loader: 'tslint-loader',
               options: {
-                presets: ['react', 'es2015'],
-              },
+                fix: true
+              }
             },
-          ],
+          ]
         },
       ],
     },
     resolve: {
-      extensions: ['.js', '.jsx'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     devServer: {
       historyApiFallback: true,
@@ -62,3 +79,31 @@ module.exports = [
     ],
   },
 ];
+
+
+// module.exports = {
+//   mode: 'development',
+//   devtool: 'cheap-module-source-map',
+//   entry: [
+//     __dirname + '/gaprot2/index.tsx'
+//   ],
+//   output: {
+//     publicPath: '/dist',
+//     filename: 'bundle.js'
+//   },
+//   resolve: {
+//     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+//   },
+//   plugins: [
+//     new webpack.NamedModulesPlugin(),
+//     new webpack.HotModuleReplacementPlugin()
+//   ],
+//   module: {
+//     rules: [
+//       {
+//         test: /\.tsx?$/,
+//         use: 'ts-loader'
+//       }
+//     ]
+//   },
+// }
