@@ -1,12 +1,7 @@
-const hoge = 'hoge'
-const num: number = 1
-alert(hoge + num)
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './App'
 
-const testFunc: (x: string) => void = x => {
-  console.log(x)
-}
-testFunc('hoge')
-
-const f2: (x: number) => number = x => x + 2
-
-const a: number[] = [1, 2, 3, 4, 5, 6]
+// ReactDOM.render(<App></App>, document.getElementsByClassName('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
